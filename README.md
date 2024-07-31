@@ -1,6 +1,6 @@
 # retail-store-discounts
 
-RETAIL STORE DISCOUNTS PROJECT CONSIST OF THREE MAIN SPRING BOOT SERVICES
+RETAIL STORE DISCOUNTS PROJECT CONSIST OF THREE MAIN SPRING BOOT SERVICES AND A GW
 
 ------------
 
@@ -14,9 +14,13 @@ RETAIL STORE DISCOUNTS PROJECT CONSIST OF THREE MAIN SPRING BOOT SERVICES
 
 
 ###### Services:
+* gw: a spring cloud gateway service used to route any request to the target service, and also has to be authenticated and authorized request
+	- It has two temp users {admin/admin} {user/user}
+	- admin has access to POST/PUT/GET/DELETE
+	- user has access to GET and POST discount
 * users: a service used to handle users crud opertaion 
 * products: a service used to handle products crud opertaion
-* discounts: main service where net payable amount get calculated.  
+* discounts: main service where net payable amount get calculated
 * store-common:
 Is a dependency jar that has common functions (exceptions, exception-handler, api response object)
 

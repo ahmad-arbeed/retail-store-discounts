@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mongodb:
     image: mongo:latest
-    container_name: mongodb
+    container_name: mongodb2
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin123
@@ -12,6 +12,12 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+  
+  gw:
+    image: gw:latest
+    container_name: gw
+    ports:
+      - "8080:8080"
 
   products:
     image: products:latest

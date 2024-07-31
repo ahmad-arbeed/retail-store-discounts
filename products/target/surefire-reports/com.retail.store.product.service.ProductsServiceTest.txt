@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.retail.store.product.service.ProductsServiceTest
--------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.089 s -- in com.retail.store.product.service.ProductsServiceTest

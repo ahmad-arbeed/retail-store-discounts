@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: gw
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: users
+            uri: http://users:8080/
+            predicates:
+              - Path=/users/**
+          - id: products
+            uri: http://products:8080/
+            predicates:
+              - Path=/products/**
+          - id: discounts
+            uri: http://discounts:8080/
+            predicates:
+              - Path=/discounts/**
+
+server:
+  shutdown: graceful
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true

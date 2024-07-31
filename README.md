@@ -2,6 +2,10 @@
 
 RETAIL STORE DISCOUNTS PROJECT CONSIST OF THREE MAIN SPRING BOOT SERVICES AND A GW
 
+
+#### UML Class Diagram
+![alt text](https://github.com/ahmad-arbeed/retail-store-discounts/blob/master/retail-store.jpg?raw=true)
+
 ------------
 
 

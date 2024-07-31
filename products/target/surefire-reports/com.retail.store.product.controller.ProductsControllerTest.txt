@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.retail.store.product.controller.ProductsControllerTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.368 s -- in com.retail.store.product.controller.ProductsControllerTest

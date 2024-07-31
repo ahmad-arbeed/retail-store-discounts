@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UsersController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">users</a> &gt; <a href="index.source.html" class="el_package">com.retail.store.user.controller</a> &gt; <span class="el_source">UsersController.java</span></div><h1>UsersController.java</h1><pre class="source lang-java linenums">package com.retail.store.user.controller;
+
+import com.retail.store.common.api.ApiResponse;
+import com.retail.store.user.dto.UserDto;
+import com.retail.store.user.service.UsersService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequiredArgsConstructor
+public class UsersController {
+
+    private final UsersService service;
+
+    @Operation(summary = &quot;Create user&quot;)
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = &quot;200&quot;, description = &quot;user created&quot;, content = {
+            @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = UserDto.class))})})
+    @PostMapping
+    public ResponseEntity&lt;ApiResponse&lt;UserDto&gt;&gt; createUser(@RequestBody @Valid UserDto userDto) {
+<span class="fc" id="L38">        return ResponseEntity.status(HttpStatus.CREATED)</span>
+<span class="fc" id="L39">            .body(ApiResponse.&lt;UserDto&gt;builder()</span>
+<span class="fc" id="L40">                .response(service.createUser(userDto))</span>
+<span class="fc" id="L41">                .build());</span>
+    }
+
+    @Operation(summary = &quot;Update user&quot;)
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = &quot;200&quot;, description = &quot;user updated&quot;, content = {
+            @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = UserDto.class))}),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = &quot;400&quot;, description = &quot;not user found&quot;, content = {
+            @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = UserDto.class))})})
+    @PutMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;ApiResponse&lt;UserDto&gt;&gt; updateUser(@PathVariable(&quot;id&quot;) long id, @RequestBody @Valid
+    UserDto userDto) {
+<span class="fc" id="L53">        return ResponseEntity.ok(ApiResponse.&lt;UserDto&gt;builder()</span>
+<span class="fc" id="L54">            .response(service.updateUser(id, userDto))</span>
+<span class="fc" id="L55">            .build());</span>
+    }
+
+    @Operation(summary = &quot;Delete user&quot;)
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = &quot;200&quot;, description = &quot;user deleted&quot;),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = &quot;400&quot;, description = &quot;not user found&quot;, content = {
+            @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = UserDto.class))})})
+    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; deleteUser(@PathVariable(&quot;id&quot;) long id) {
+<span class="fc" id="L65">        service.deleteUser(id);</span>
+<span class="fc" id="L66">        return ResponseEntity.noContent().build();</span>
+    }
+
+    @Operation(summary = &quot;Get user by id&quot;)
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = &quot;200&quot;, description = &quot;user found&quot;, content = {
+            @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = UserDto.class))}),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = &quot;400&quot;, description = &quot;not user found&quot;, content = {
+            @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = UserDto.class))})})
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;ApiResponse&lt;UserDto&gt;&gt; getUser(@PathVariable(&quot;id&quot;) long id) {
+<span class="fc" id="L77">        return ResponseEntity.ok(ApiResponse.&lt;UserDto&gt;builder()</span>
+<span class="fc" id="L78">            .response(service.getUser(id))</span>
+<span class="fc" id="L79">            .build());</span>
+    }
+
+    @Operation(summary = &quot;Get all users&quot;)
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = &quot;200&quot;, description = &quot;users returned if any&quot;, content = {
+            @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = UserDto.class))})})
+    @GetMapping
+    public ResponseEntity&lt;ApiResponse&lt;Page&lt;UserDto&gt;&gt;&gt; getAllUsers(
+        @RequestParam(name = &quot;page&quot;, defaultValue = &quot;0&quot;) int page,
+        @RequestParam(name = &quot;size&quot;, defaultValue = &quot;10&quot;) int size) {
+
+<span class="pc bpc" id="L91" title="1 of 4 branches missed.">        Pageable pageable = page &lt; 0 || size &lt; 1 ? Pageable.unpaged() : PageRequest.of(page, size);</span>
+<span class="fc" id="L92">        return ResponseEntity.ok(ApiResponse.&lt;Page&lt;UserDto&gt;&gt;builder()</span>
+<span class="fc" id="L93">            .response(service.getAllUsers(pageable))</span>
+<span class="fc" id="L94">            .build());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

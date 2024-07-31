@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: retail-store
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  products:
+    image: products:latest
+    container_name: products
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://admin:admin123@mongodb:27017/retail-store?authSource=admin
+    depends_on:
+      - mongodb
+    ports:
+      - "8081:8080"
+
+  users:
+    image: users:latest
+    container_name: users
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://admin:admin123@mongodb:27017/retail-store?authSource=admin
+    depends_on:
+      - mongodb
+    ports:
+      - "8082:8080"
+
+  discounts:
+    image: discounts:latest
+    container_name: discounts
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://admin:admin123@mongodb:27017/retail-store?authSource=admin
+      FEIGN_USERS_SERVICE_URL: http://users:8080/users
+      FEIGN_PRODUCTS_SERVICE_URL: http://products:8080/products
+    depends_on:
+      - mongodb
+    ports:
+      - "8083:8080"
+
+volumes:
+  mongo-data:

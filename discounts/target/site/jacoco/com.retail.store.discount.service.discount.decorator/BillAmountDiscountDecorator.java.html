@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BillAmountDiscountDecorator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">discounts</a> &gt; <a href="index.source.html" class="el_package">com.retail.store.discount.service.discount.decorator</a> &gt; <span class="el_source">BillAmountDiscountDecorator.java</span></div><h1>BillAmountDiscountDecorator.java</h1><pre class="source lang-java linenums">package com.retail.store.discount.service.discount.decorator;
+
+import com.retail.store.discount.service.discount.Discount;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+public class BillAmountDiscountDecorator extends DiscountDecorator {
+
+    public BillAmountDiscountDecorator(Discount discount) {
+<span class="fc" id="L10">        super(discount);</span>
+<span class="fc" id="L11">    }</span>
+
+    @Override
+    public BigDecimal applyDiscount(final BigDecimal totalAmount) {
+<span class="fc" id="L15">        var discountAmount = totalAmount.divide(new BigDecimal(&quot;100&quot;), RoundingMode.FLOOR).multiply(new BigDecimal(&quot;5&quot;));</span>
+<span class="fc" id="L16">        return super.applyDiscount(totalAmount).add(discountAmount);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

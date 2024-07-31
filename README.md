@@ -52,9 +52,9 @@ You can run test cases and jacoco report by the following:
 
 ------------
 ###### Swagger
-products: http://localhost:8081/products/swagger-ui/index.html
-users: http://localhost:8082/users/swagger-ui/index.html
-discounts: http://localhost:8083/discounts/swagger-ui/index.html
+* products: http://localhost:8081/products/swagger-ui/index.html
+* users: http://localhost:8082/users/swagger-ui/index.html
+* discounts: http://localhost:8083/discounts/swagger-ui/index.html
 
 ------------
 ###### SonarQube
